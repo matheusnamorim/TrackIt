@@ -6,6 +6,7 @@ const Form = styled.form`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     input{
         width: 303px;
@@ -38,6 +39,15 @@ const Form = styled.form`
         margin-bottom: 25px;
         font-family: 'Lexend Deca', sans-serif;
         font-weight: 400;
+        cursor: pointer;
+    }
+
+    ion-icon{
+        position: absolute;
+        font-size: 22px;
+        right: 5px;
+        top: 65px;
+        cursor: pointer;
     }
 `;
 

@@ -3,6 +3,11 @@ import logo from '../../assets/imgs/logo.png';
 
 
 export default function MainRoute(){
+
+    function login(event){
+        event.preventDefault();
+    }
+
     return (
         <>
             <Container>
@@ -10,11 +15,11 @@ export default function MainRoute(){
                     <img src={logo}/>
                     <p>TrackIt</p>
                 </Logo>
-                <input type='email' placeholder="email" />
-                <input type='password' placeholder="senha" />
-                <ButtonLogin>
-                    Entrar
-                </ButtonLogin>
+                <Form onSubmit={login}>
+                    <input type='email' placeholder="email" required/>
+                    <input type='password' placeholder="senha" required/>
+                    <button>Entrar</button>
+                </Form>
                 <p>Não tem uma conta? Cadastre-se!</p>
             </Container>
         </>
@@ -26,6 +31,15 @@ const Container = styled.div`
     
 	width: 100%;
 	height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+`;
+
+const Form = styled.form`
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,20 +64,20 @@ const Container = styled.div`
         font-size: 14px;
         color: #52B6FF;
     }
-    
-`;
 
-const ButtonLogin = styled.div`
-    width: 303px;
-    height: 45px;
-    background-color: #52B6FF;
-    border-radius: 5px;
-    color: #FFFFFF;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 25px;
+    button{
+        width: 303px;
+        height: 45px;
+        background-color: #52B6FF;
+        border: 1px solid #FFF;
+        border-radius: 5px;
+        color: #FFFFFF;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+    }
 `;
 
 const Logo = styled.div`

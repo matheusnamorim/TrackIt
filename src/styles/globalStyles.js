@@ -29,6 +29,8 @@ const GlobalStyle = createGlobalStyle`
     body {
         line-height: 1;
         background-color: #FFF;
+        font-family: 'Lexend Deca', sans-serif;
+        font-weight: 400;
     }
     ol, ul {
         list-style: none;
@@ -44,6 +46,9 @@ const GlobalStyle = createGlobalStyle`
     table {
         border-collapse: collapse;
         border-spacing: 0;
+    }
+    *{
+        box-sizing: border-box;
     }
 `;
 

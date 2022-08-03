@@ -4,15 +4,23 @@ import Logo from "../Logo/Logo";
 import Form from "../../styles/Form";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Registration(){
 
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [url, setUrl] = useState('');
     const [typeInput, setTypeInput] = useState('password');
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [msgbtn, setMsgBtn] = useState('Cadastrar');
 
     function register(event){
         event.preventDefault();
-
+        setIsDisabled(true);
+        setMsgBtn(<ThreeDots color="#FFF" height={45} width={45} />);
     }
 
     function showPassword(){
@@ -24,15 +32,15 @@ export default function Registration(){
         <>
             <Container>
                 <Logo/>
-                <Form onSubmit={register}>
-                    <input type='email' placeholder="email" required/>
-                    <input type={typeInput} placeholder="senha" required/>
+                <Form onSubmit={register} color={+isDisabled}>
+                    <input type='email' disabled={isDisabled} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email" required/>
+                    <input type={typeInput} disabled={isDisabled} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="senha" required/>
                     <ion-icon onClick={() => showPassword()} name="eye-outline"></ion-icon>
-                    <input type='text' placeholder="nome" required/>
-                    <input type='url' placeholder="foto" required/>
-                    <button>Cadastrar</button>
+                    <input type='text' value={name} onChange={(e) => setName(e.target.value)} placeholder="nome" disabled={isDisabled} required/>
+                    <input type='url' value={url} onChange={(e) => setUrl(e.target.value)} placeholder="foto" disabled={isDisabled} required/>
+                    <button disabled={isDisabled} >{msgbtn}</button>
                 </Form>
-                <Login onClick={() => navigate('/')}>Já tem uma conta? Faça login!</Login>
+                <Login onClick={() => {if(!isDisabled) navigate('/')}}>Já tem uma conta? Faça login!</Login>
             </Container>
         </>
     );

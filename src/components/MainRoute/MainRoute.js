@@ -16,9 +16,9 @@ export default function MainRoute(){
     const [isDisabled, setIsDisabled] = useState(false);
 
     function login(event){
+        event.preventDefault();
         setIsDisabled(true);
         setMsgBtn(<ThreeDots color="#FFF" height={45} width={45} />);
-        event.preventDefault();
     }
 
     function showPassword(){

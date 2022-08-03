@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Container from "../../styles/Container";
 import Form from "../../styles/Form";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function MainRoute(){
 
@@ -11,8 +12,12 @@ export default function MainRoute(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [typeInput, setTypeInput] = useState('password');
+    const [msgbtn, setMsgBtn] = useState('Entrar');
+    const [isDisabled, setIsDisabled] = useState(false);
 
     function login(event){
+        setIsDisabled(true);
+        setMsgBtn(<ThreeDots color="#FFF" height={45} width={45} />);
         event.preventDefault();
     }
 
@@ -25,13 +30,13 @@ export default function MainRoute(){
         <>
             <Container>
                 <Logo />
-                <Form onSubmit={login}>
-                    <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email" required/>
-                    <input type={typeInput} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="senha" required/>
+                <Form onSubmit={login} color={+isDisabled}>
+                    <input type='email' disabled={isDisabled} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email" required/>
+                    <input type={typeInput} disabled={isDisabled} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="senha" required/>
                     <ion-icon onClick={() => showPassword()} name="eye-outline"></ion-icon>
-                    <button>Entrar</button>
+                    <button disabled={isDisabled}>{msgbtn}</button>
                 </Form>
-                <Register onClick={() => navigate('/cadastro')}>Não tem uma conta? Cadastre-se!</Register>
+                <Register onClick={() => {if(!isDisabled) navigate('/cadastro')}}>Não tem uma conta? Cadastre-se!</Register>
             </Container>
         </>
     );

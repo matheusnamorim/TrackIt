@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-const Form = styled.form`
+export default function Form({children, color, ...otherprops}){
+
+    return <Wrapper color={color} {...otherprops}>{children}</Wrapper>
+}
+
+const Wrapper = styled.form`
 
     display: flex;
     flex-direction: column;
@@ -9,6 +14,7 @@ const Form = styled.form`
     position: relative;
 
     input{
+        background-color: ${props => props.color ? ' #F2F2F2' : '#FFF'};
         width: 303px;
         height: 45px;
         border-radius: 5px;
@@ -18,6 +24,7 @@ const Form = styled.form`
         font-size: 20px;
         font-family: 'Lexend Deca', sans-serif;
         font-weight: 400;
+        color: ${props => props.color ? '#AFAFAF' : '#000'};
     }
 
     input::placeholder{
@@ -49,6 +56,14 @@ const Form = styled.form`
         top: 65px;
         cursor: pointer;
     }
-`;
 
-export default Form;
+    /* ${(props) => {
+        if(props.color) {
+            return `
+                button{
+                    background-color: #000;
+                }
+            `;
+        }
+    }} */
+`;

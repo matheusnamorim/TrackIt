@@ -12,6 +12,7 @@ export default function Registration(){
 
     function register(event){
         event.preventDefault();
+
     }
 
     function showPassword(){

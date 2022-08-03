@@ -5,6 +5,7 @@ import Form from "../../styles/Form";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
+import { registerUser } from "../services/trackit";
 
 export default function Registration(){
 
@@ -19,8 +20,29 @@ export default function Registration(){
 
     function register(event){
         event.preventDefault();
+
         setIsDisabled(true);
         setMsgBtn(<ThreeDots color="#FFF" height={45} width={45} />);
+        const body = {
+            email: email,
+            name: name,
+            image: url,
+            password: password
+        };
+
+        setTimeout(function(){
+            registerUser(body)
+            .then(() => {
+                navigate('/');
+            })
+            .catch(() => {
+                alert('ERRO: insira os dados novamente');
+                setIsDisabled(false);
+                setMsgBtn('Cadastar');
+            });
+
+        }, 2000);
+
     }
 
     function showPassword(){

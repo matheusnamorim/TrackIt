@@ -1,33 +1,35 @@
 import styled from "styled-components";
-import Logo from "../Logo/Logo";
-import { useNavigate } from "react-router-dom";
 import Container from "../../styles/Container";
+import Logo from "../Logo/Logo";
 import Form from "../../styles/Form";
+import { useNavigate } from "react-router-dom";
 
-export default function MainRoute(){
+export default function Registration(){
 
     const navigate = useNavigate();
 
-    function login(event){
+    function register(event){
         event.preventDefault();
     }
 
     return (
         <>
             <Container>
-                <Logo />
-                <Form onSubmit={login}>
+                <Logo/>
+                <Form onSubmit={register}>
                     <input type='email' placeholder="email" required/>
                     <input type='password' placeholder="senha" required/>
-                    <button>Entrar</button>
+                    <input type='text' placeholder="nome" required/>
+                    <input type='url' placeholder="foto" required/>
+                    <button>Cadastrar</button>
                 </Form>
-                <Register onClick={() => navigate('/cadastro')}>Não tem uma conta? Cadastre-se!</Register>
+                <Login onClick={() => navigate('/')}>Já tem uma conta? Faça login!</Login>
             </Container>
         </>
     );
 }
 
-const Register = styled.p` 
+const Login = styled.p`
     text-decoration: underline;
     font-size: 14px;
     color: #52B6FF;

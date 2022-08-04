@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
-export default function Top({children}){
-    return (<Wrapper>{children}</Wrapper>);
+export default function TopBar({img}){
+    return( 
+        <>
+            <Wrapper>
+                <p>TrackIt</p>
+                <img src={img}/>
+            </Wrapper>
+        </>
+    );
 }
 
 const Wrapper = styled.div`

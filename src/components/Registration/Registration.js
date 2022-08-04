@@ -42,7 +42,7 @@ export default function Registration(){
                 setMsgBtn('Cadastar');
             });
 
-        }, 2000);
+        }, 1000);
 
     }
 

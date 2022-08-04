@@ -35,6 +35,8 @@ export default function MainRoute(){
             signIn(body)
             .then((data) => {
                 setLoginData(data.data);
+                const dadosSerializados = JSON.stringify(data.data);
+                localStorage.setItem('trackit', dadosSerializados);
                 navigate('/hoje');
             })
             .catch(() => {
@@ -42,7 +44,7 @@ export default function MainRoute(){
                 setIsDisabled(false);
                 setMsgBtn('Entrar');
             });
-        }, 2000);
+        }, 1000);
     }
 
     function showPassword(){

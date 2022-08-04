@@ -1,27 +1,21 @@
 import styled from "styled-components";
 import locale from "../services/pt-br";
 import dayjs from "dayjs";
-import Top from "../../styles/Top";
 import Container from "../../styles/Container";
-import { useContext } from "react";
-import UserContext from '../../contexts/UserContext'
 import Footer from "../Footer/Footer";
+import TopBar from "../TopBar/TopBar";
 
 export default function Today(){
 
-    const {loginData, setLoginData}  =  useContext(UserContext);
-
+    const auth = JSON.parse(localStorage.getItem('trackit'));
+    
     dayjs.locale('pt-br');
-
     const day = (dayjs().format('dddd, DD/MM'));
 
     return (
         <>
             <Container color='#f2f2f2'>
-            <Top>
-                <p>TrackIt</p>
-                <img src={loginData.image}/>
-            </Top>
+            <TopBar img={auth.image}/>
             <Habits>
                 {day}
                 <p>Nenhum hábito concluído ainda</p>

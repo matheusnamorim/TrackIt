@@ -1,23 +1,30 @@
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { Link } from "react-router-dom";
 
 export default function Footer(){
     const percentage = 50;
     return (
         <>
         <FooterBar>
-            <p>Hábitos</p>
-            <Progress>
-            <CircularProgressbar value={percentage} text='Hoje' background backgroundPadding={6} styles={buildStyles({
-                backgroundColor: "#52B6FF",
-                textColor: "#fff",
-                pathColor: "#fff",
-                trailColor: "transparent"
-        })}
-      />
-            </Progress>
-            <p>Histórico</p>
+            <Link to='/habitos' style={{ textDecoration: 'none' }}>
+                <p>Hábitos</p>
+            </Link>
+            <Link to='/hoje' style={{ textDecoration: 'none' }}>
+                <Progress>
+                <CircularProgressbar value={percentage} text='Hoje' background backgroundPadding={6} styles={buildStyles({
+                    backgroundColor: "#52B6FF",
+                    textColor: "#fff",
+                    pathColor: "#fff",
+                    trailColor: "transparent"
+                })}
+                />
+                </Progress>
+            </Link>
+            <Link to='/historico' style={{ textDecoration: 'none' }}>
+                <p>Histórico</p>
+            </Link>
         </FooterBar>
         </>
     );
@@ -39,6 +46,7 @@ const FooterBar = styled.div`
     p{
         font-size: 18px;
         color: #52B6FF;
+        cursor: pointer;
     }
 `;
 
@@ -52,4 +60,5 @@ const Progress = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 `;

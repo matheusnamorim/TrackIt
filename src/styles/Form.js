@@ -56,14 +56,4 @@ const Wrapper = styled.form`
         top: 65px;
         cursor: pointer;
     }
-
-    /* ${(props) => {
-        if(props.color) {
-            return `
-                button{
-                    background-color: #000;
-                }
-            `;
-        }
-    }} */
 `;

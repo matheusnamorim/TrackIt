@@ -2,8 +2,10 @@ import styled from "styled-components";
 import locale from "../services/pt-br";
 import dayjs from "dayjs";
 import Top from "../../styles/Top";
+import Container from "../../styles/Container";
 import { useContext } from "react";
 import UserContext from '../../contexts/UserContext'
+import Footer from "../Footer/Footer";
 
 export default function Today(){
 
@@ -15,6 +17,7 @@ export default function Today(){
 
     return (
         <>
+            <Container color='#f2f2f2'>
             <Top>
                 <p>TrackIt</p>
                 <img src={loginData.image}/>
@@ -23,12 +26,14 @@ export default function Today(){
                 {day}
                 <p>Nenhum hábito concluído ainda</p>
             </Habits>
+            <Footer></Footer>
+            </Container>
         </>
     );
 }
 
 const Habits = styled.div`
-    margin-top: 100px;
+    padding-top: 100px;
     padding-left: 18px;
     color: #126BA5;
     font-size: 22px;

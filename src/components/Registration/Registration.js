@@ -59,7 +59,7 @@ export default function Registration(){
 
     return (
         <>
-            <Container>
+            <Container color='#FFF' aligner={+true}>
                 <Logo/>
                 <Form onSubmit={register} color={+isDisabled}>
                     <input type='email' disabled={isDisabled} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email" required/>

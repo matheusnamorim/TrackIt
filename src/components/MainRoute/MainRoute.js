@@ -5,6 +5,9 @@ import { useState } from "react";
 import Container from "../../styles/Container";
 import Form from "../../styles/Form";
 import { ThreeDots } from "react-loader-spinner";
+import { signIn } from "../services/trackit";
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
 
 export default function MainRoute(){
 
@@ -15,10 +18,30 @@ export default function MainRoute(){
     const [msgbtn, setMsgBtn] = useState('Entrar');
     const [isDisabled, setIsDisabled] = useState(false);
 
+    const {loginData, setLoginData} = useContext(UserContext);
+
     function login(event){
         event.preventDefault();
         setIsDisabled(true);
         setMsgBtn(<ThreeDots color="#FFF" height={45} width={45} />);
+
+        const body ={
+            email: email,
+            password: password
+        };
+
+        setTimeout(function(){
+            signIn(body)
+            .then((data) => {
+                setLoginData(data.data);
+                navigate('/hoje');
+            })
+            .catch(() => {
+                alert('ERRO: insira os dados novamente');
+                setIsDisabled(false);
+                setMsgBtn('Entrar');
+            });
+        }, 2000);
     }
 
     function showPassword(){

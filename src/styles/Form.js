@@ -52,7 +52,7 @@ const Wrapper = styled.form`
     ion-icon{
         position: absolute;
         font-size: 22px;
-        right: 5px;
+        right: 10px;
         top: 65px;
         cursor: pointer;
     }

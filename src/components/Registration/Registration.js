@@ -17,6 +17,7 @@ export default function Registration(){
     const [typeInput, setTypeInput] = useState('password');
     const [isDisabled, setIsDisabled] = useState(false);
     const [msgbtn, setMsgBtn] = useState('Cadastrar');
+    const [eye, setEye] = useState('eye-off-outline');
 
     function register(event){
         event.preventDefault();
@@ -46,8 +47,14 @@ export default function Registration(){
     }
 
     function showPassword(){
-        if(typeInput === 'password') setTypeInput('text');
-        if(typeInput === 'text') setTypeInput('password');
+        if(typeInput === 'password') {
+            setTypeInput('text');
+            setEye('eye-outline');
+        }
+        if(typeInput === 'text') {
+            setTypeInput('password');
+            setEye('eye-off-outline');
+        }
     }
 
     return (
@@ -57,7 +64,7 @@ export default function Registration(){
                 <Form onSubmit={register} color={+isDisabled}>
                     <input type='email' disabled={isDisabled} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email" required/>
                     <input type={typeInput} disabled={isDisabled} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="senha" required/>
-                    <ion-icon onClick={() => showPassword()} name="eye-outline"></ion-icon>
+                    <ion-icon onClick={() => showPassword()} name={eye}></ion-icon>
                     <input type='text' value={name} onChange={(e) => setName(e.target.value)} placeholder="nome" disabled={isDisabled} required/>
                     <input type='url' value={url} onChange={(e) => setUrl(e.target.value)} placeholder="foto" disabled={isDisabled} required/>
                     <button disabled={isDisabled} >{msgbtn}</button>

@@ -16,7 +16,6 @@ export default function Habits(){
     const days = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
     const navigate = useNavigate();
     const auth = JSON.parse(localStorage.getItem('trackit'));
-    const [text, setText] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
     const [nameHabits, setNameHabits] = useState('');
     const [daysSelected, setDaysSelected] = useState([]);
@@ -25,11 +24,12 @@ export default function Habits(){
     const [habits, setHabits] = useState([]);
 
     useEffect(() => {
-        const promise = habitsList({});
-        promise.then((data) => {
-            setHabits(data.data);
-            setText(true);
-        });
+        setTimeout(function(){
+            const promise = habitsList({});
+            promise.then((data) => {
+                setHabits(data.data);
+            });
+        }, 2000);
     }, []);
 
 
@@ -85,11 +85,9 @@ export default function Habits(){
                     </CreateHabits>) 
                 : 
                 (<></>)}
-
+                
                 <Wrapper>
-                    {text ? habits.map((value, index) => <ThereHabits key={index} value={value}/>) : 
-                        <NoHabits>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabits>
-                    }
+                    {habits.map((value, index) => <ThereHabits key={index} length={habits.length} value={value}/>)}
                 </Wrapper>
                 <Footer/>
             </Container>
@@ -123,13 +121,6 @@ const MyHabits = styled.div`
         color: #FFF;
         --ionicon-stroke-width: 80px;
     }
-`;
-
-const NoHabits = styled.p`
-    padding: 28px 18px;
-    font-size: 18px;
-    font-weight: 400;
-    color: #666666;
 `;
 
 const Wrapper = styled.div`

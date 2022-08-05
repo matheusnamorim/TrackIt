@@ -1,26 +1,27 @@
 import styled from "styled-components";
 import Days from "../Days/Days";
 
-export default function ThereHabits ({value}){
+export default function ThereHabits ({value, length}){
 
     const days = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
-    const daysN = days.filter((e, index) => !value.days.includes(index));
-    const daysS= days.filter((e, index) => value.days.includes(index));
     const aux = [...value.days];
 
-    return (
-        <>
-            <Wrapper>
-                <div className="infos">
-                    <p>{value.name}</p>
-                    <ul>
-                        {days.map((value, index) => <Days key={index} type={true} index={index} array={aux} value={value} />)}
-                    </ul>
-                </div>
-                <ion-icon name="trash-outline"></ion-icon>
-            </Wrapper>
-        </>
-    );
+    if(length === 0) return <NoHabits>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabits>;
+    else{
+        return (
+            <>
+                <Wrapper>
+                    <div className="infos">
+                        <p>{value.name}</p>
+                        <ul>
+                            {days.map((value, index) => <Days key={index} type={true} index={index} array={aux} value={value} />)}
+                        </ul>
+                    </div>
+                    <ion-icon name="trash-outline"></ion-icon>
+                </Wrapper>
+            </>
+        );
+    }
 }
 
 const Wrapper = styled.div`
@@ -70,3 +71,10 @@ const Wrapper = styled.div`
         padding: 15px;
     }
 `
+
+const NoHabits = styled.p`
+    padding: 28px 18px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #666666;
+`;

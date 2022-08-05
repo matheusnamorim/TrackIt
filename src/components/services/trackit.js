@@ -27,4 +27,10 @@ function habitsList(body){
     return promise;
 }
 
-export { signIn, registerUser, habitsList };
+function createHabit(body){
+    const config = createHeaders();
+    const promise = axios.post(`${base_URl}/habits`, body, config);
+    return promise;
+}
+
+export { signIn, registerUser, habitsList, createHabit };

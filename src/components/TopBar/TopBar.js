@@ -13,6 +13,7 @@ export default function TopBar({img}){
 
 const Wrapper = styled.div`
     position: fixed;
+    z-index: 1;
     height: 70px;
     width: 100%;
     top: 0;

@@ -9,6 +9,7 @@ import { useEffect, useState, useContext } from "react";
 import HabitsList from "../HabitsList/HabitsList";
 import { doneHabits } from "../services/trackit";
 import UserContext from "../../contexts/UserContext";
+import { unDoneHabits } from "../services/trackit";
 
 
 export default function Today(){
@@ -35,13 +36,21 @@ export default function Today(){
     }, [reload]);
 
 
-    function doneHabit(id){
-        doneHabits(id, {})
-        .then((data) => {
-            console.log(data);
-            setReload(!reload);
-        })
-        .catch(() => alert('ERRO: tente novamente')); 
+    function Habit(id, done){
+        if(!done){
+            doneHabits(id, {})
+            .then(() => {
+                setReload(!reload);
+            })
+            .catch(() => alert('ERRO: tente novamente')); 
+        }else{
+            unDoneHabits(id, {})
+            .then(data => {
+                setReload(!reload);
+            })
+            .catch(() => alert('ERRO: tente novamente'));
+        }
+
     }
 
     return (
@@ -52,7 +61,7 @@ export default function Today(){
                     {day}
                     <p>{msg}</p>
                     {habits.map((value, index) => (
-                        <HabitsList value={value} key={index} doneHabit={doneHabit}/>
+                        <HabitsList value={value} key={index} Habit={Habit}/>
                     ))}
                 </Habits>
                 <Footer></Footer>

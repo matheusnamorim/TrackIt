@@ -51,4 +51,10 @@ function doneHabits(id, body){
     return promise;
 }
 
-export { signIn, registerUser, habitsList, createHabit, deleteHabits, habitsOfToday, doneHabits };
+function unDoneHabits(id, body){
+    const config = createHeaders();
+    const promise = axios.post(`${base_URl}/habits/${id}/uncheck`, body, config);
+    return promise;
+}
+
+export { signIn, registerUser, habitsList, createHabit, deleteHabits, habitsOfToday, doneHabits, unDoneHabits};

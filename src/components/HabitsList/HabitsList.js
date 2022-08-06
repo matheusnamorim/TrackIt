@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
 import HabitsStyles from "../../styles/HabitsStyles";
 
 
-export default function HabitsList({value, doneHabit}){
+export default function HabitsList({value, Habit}){
 
     const equal = ((value.currentSequence === value.highestSequence) &&  value.highestSequence !== 0);
 
@@ -14,7 +13,7 @@ export default function HabitsList({value, doneHabit}){
                 <h1>Sequência atual: <b> {value.currentSequence} dias</b></h1>
                 <h1>Seu recorde: <strong>{value.highestSequence} dias</strong></h1>
                 </div>
-                <span onClick={() => doneHabit(value.id)}>
+                <span onClick={() => Habit(value.id, value.done)}>
                     <ion-icon name="checkbox"></ion-icon>
                 </span>
             </HabitsStyles>

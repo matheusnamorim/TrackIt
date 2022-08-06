@@ -54,10 +54,9 @@ export default function Today(){
     }
     useEffect(() => {
         const aux = (Math.ceil(((percent.filter(e => e.done === true).length)/habits.length)*100));
-        if(aux !== 0) {
-            setValuePer(aux);
-            setTypeMsg(true);
-        }else setTypeMsg(false);
+        setValuePer(aux);
+        if(aux !== 0) setTypeMsg(true);
+        else setTypeMsg(false);
     }, [percent]);
 
     return (
@@ -71,7 +70,7 @@ export default function Today(){
                         <HabitsList value={value} key={index} Habit={Habit}/>
                     ))}
                 </Habits>
-                <Footer></Footer>
+                <Footer percentage={valuePer}></Footer>
             </Container>
         </>
     );

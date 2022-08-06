@@ -14,7 +14,7 @@ import { unDoneHabits } from "../services/trackit";
 
 export default function Today(){
 
-    const {percent, setPercent} = useContext(UserContext);
+    const {percent, setPercent, cent, setCent} = useContext(UserContext);
     const [habits, setHabits] = useState([]);
     const [reload, setReload] = useState(false);
     const [valuePer, setValuePer] = useState(0)
@@ -24,6 +24,15 @@ export default function Today(){
     dayjs.locale('pt-br');
     const day = (dayjs().format('dddd, DD/MM'));
     
+    useEffect(() => {
+        const aux = (Math.ceil(((percent.filter(e => e.done === true).length)/habits.length)*100));
+        if((isFinite(aux))){
+            setValuePer(aux);
+            if(aux !== 0) setTypeMsg(true);
+            else setTypeMsg(false);
+            setCent(aux);
+        }
+    }, [percent, reload]);
 
     useEffect(() => {
         habitsOfToday()
@@ -50,14 +59,7 @@ export default function Today(){
             })
             .catch(() => alert('ERRO: tente novamente'));
         }
-
     }
-    useEffect(() => {
-        const aux = (Math.ceil(((percent.filter(e => e.done === true).length)/habits.length)*100));
-        setValuePer(aux);
-        if(aux !== 0) setTypeMsg(true);
-        else setTypeMsg(false);
-    }, [percent]);
 
     return (
         <>            
@@ -70,7 +72,7 @@ export default function Today(){
                         <HabitsList value={value} key={index} Habit={Habit}/>
                     ))}
                 </Habits>
-                <Footer percentage={valuePer}></Footer>
+                <Footer></Footer>
             </Container>
         </>
     );

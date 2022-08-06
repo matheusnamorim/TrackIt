@@ -46,6 +46,7 @@ const Wrapper = styled.div`
     span{
         width: 69px;
         height: 69px;
+        cursor: pointer;
 
         ion-icon{
             font-size: 69px;

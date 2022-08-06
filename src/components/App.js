@@ -23,10 +23,11 @@ export default function App(){
 
     const [weekSelected, setWeekSelected] = useState([]);
     const [percent, setPercent] = useState([]);
+    const [cent, setCent] = useState(0);
 
     return (
         <>
-            <UserContext.Provider value={{weekDay, setWeekDay, weekSelected, setWeekSelected, percent, setPercent}}>
+            <UserContext.Provider value={{weekDay, setWeekDay, weekSelected, setWeekSelected, percent, setPercent, cent, setCent}}>
                 <GlobalStyle/>
                 <BrowserRouter>
                     <Routes>

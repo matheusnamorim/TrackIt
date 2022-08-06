@@ -9,8 +9,8 @@ import Days from "../Days/Days";
 import { ThreeDots } from "react-loader-spinner";
 import { createHabit } from "../services/trackit";
 import ThereHabits from "../ThereHabits/ThereHabits";
-import { useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
+import { deleteHabits } from "../services/trackit";
 
 export default function Habits(){
 
@@ -20,18 +20,18 @@ export default function Habits(){
     const [msgBtnSave, setMsgBtnSave] = useState('Salvar');
     const [colorSave, setColorSave] = useState(false);
     const [habits, setHabits] = useState([]);
+    const [reload, setReload] = useState(false);
     const [thereHabits, setThereHabits] = useState(true);
-    const navigate = useNavigate();
 
     const { weekDay, weekSelected } = useContext(UserContext);
-
+    
     useEffect(() => {
         const promise = habitsList({});
         promise.then((data) => {
             setHabits(data.data); 
             if(data.data.length === 0) setThereHabits(false);
         });
-    }, []);
+    }, [reload]);
 
     function saveHabits(){
         if(!colorSave){
@@ -46,7 +46,8 @@ export default function Habits(){
                     createHabit(body)
                     .then(() => {
                         setThereHabits(true);
-                        navigate(0);
+                        setReload(!reload);
+                        setIsDisabled(!isDisabled);
                     })
                     .catch(() => {
                         alert('Erro: insira os dados novamente');
@@ -65,6 +66,19 @@ export default function Habits(){
 
         }
     }
+
+    function deleteHabit(id){
+        if(window.confirm('Deseja excluir esse Hábito?')){
+            deleteHabits(id)
+                .then(() => {
+                    setTimeout(function(){
+                        setReload(!reload);
+                    }, 1000);
+                    }
+                );
+        }
+    }
+
     return (
         <>
             <Container color='#f2f2f2'>
@@ -90,7 +104,7 @@ export default function Habits(){
                 (<></>)}
                 
                 <Wrapper>
-                    {thereHabits ? habits.map((value, index) => <ThereHabits key={index} value={value}/>) :
+                    {thereHabits ? habits.map((value, index) => <ThereHabits deleteHabit={deleteHabit} key={index} value={value}/>) :
                         <NoHabits>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabits>
                     }
                 </Wrapper>

@@ -1,27 +1,12 @@
 import styled from "styled-components";
 import Days from "../Days/Days";
-import { deleteHabits } from "../services/trackit";
-import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
 
-export default function ThereHabits ({value}){
+export default function ThereHabits ({value, deleteHabit}){
 
-    const navigate = useNavigate();
     const {weekDay} = useContext(UserContext);
     const aux = [...value.days];
-
-    function deleteHabit(id){
-        if(window.confirm('Deseja excluir esse Hábito?')){
-            deleteHabits(id)
-                .then(() => {
-                    setTimeout(function(){
-                    navigate(0);
-                    }, 1000);
-                    }
-                );
-        }
-    }
 
     return (
         <>

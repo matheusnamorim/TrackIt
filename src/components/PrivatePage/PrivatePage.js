@@ -1,3 +1,4 @@
+import WithoutPermission from "../WithoutPermission/WithoutPermission";
 
 export default function PrivatePage({children}){
 
@@ -6,6 +7,6 @@ export default function PrivatePage({children}){
     if(auth) {
         return <>{children}</>;
     }else{
-        return <></>;
+        return <WithoutPermission></WithoutPermission>;
     }
 }

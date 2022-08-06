@@ -36,6 +36,7 @@ export default function App(){
                         <Route path='/hoje' element={<PrivatePage><Today/></PrivatePage>}/>
                         <Route path='/habitos' element={<PrivatePage><Habits/></PrivatePage>}/>
                         <Route path='/historico' element={<PrivatePage><History/></PrivatePage>}/>
+                        <Route path='*' element={<MainRoute/>}/>
                     </Routes>
                 </BrowserRouter>
             </UserContext.Provider>

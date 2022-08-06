@@ -17,7 +17,8 @@ export default function Today(){
     const {percent, setPercent} = useContext(UserContext);
     const [habits, setHabits] = useState([]);
     const [reload, setReload] = useState(false);
-    const [msg, setMsg] = useState('Nenhum hábito concluído ainda')
+    const [valuePer, setValuePer] = useState(0)
+    const [typeMsg, setTypeMsg] = useState(false);
 
     const auth = JSON.parse(localStorage.getItem('trackit'));
     dayjs.locale('pt-br');
@@ -25,12 +26,11 @@ export default function Today(){
     
 
     useEffect(() => {
-        // console.log(habits);
-        // console.log(((habits.filter(e => e.done === true).length)/habits.length)*100);
-        // setPercent(((habits.filter(e => e.done === true).length)/habits.length)*100);
         habitsOfToday()
         .then
-            (data => setHabits(data.data))
+            (data => {
+                setHabits(data.data)
+                setPercent(data.data)})
         .catch
             (data => data)
     }, [reload]);
@@ -45,13 +45,20 @@ export default function Today(){
             .catch(() => alert('ERRO: tente novamente')); 
         }else{
             unDoneHabits(id, {})
-            .then(data => {
+            .then(() => {
                 setReload(!reload);
             })
             .catch(() => alert('ERRO: tente novamente'));
         }
 
     }
+    useEffect(() => {
+        const aux = (Math.ceil(((percent.filter(e => e.done === true).length)/habits.length)*100));
+        if(aux !== 0) {
+            setValuePer(aux);
+            setTypeMsg(true);
+        }else setTypeMsg(false);
+    }, [percent]);
 
     return (
         <>            
@@ -59,7 +66,7 @@ export default function Today(){
                 <TopBar img={auth.image}/>
                 <Habits>
                     {day}
-                    <p>{msg}</p>
+                    <P typeMsg={typeMsg}>{typeMsg ? `${valuePer}% dos hábitos concluído` : 'Nenhum hábito concluído ainda'}</P>
                     {habits.map((value, index) => (
                         <HabitsList value={value} key={index} Habit={Habit}/>
                     ))}
@@ -75,11 +82,10 @@ const Habits = styled.div`
     padding-left: 18px;
     color: #126BA5;
     font-size: 22px;
+`;
 
-    p{
-        margin: 5px 0 28px 0;
-        color: #BABABA;
-        font-size: 18px;
-    }
-
+const P = styled.p`
+    margin: 5px 0 28px 0;
+    color: ${props => props.typeMsg ? '#8FC549' : '#BABABA'};
+    font-size: 18px;
 `;

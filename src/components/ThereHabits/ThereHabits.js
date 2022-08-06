@@ -1,27 +1,41 @@
 import styled from "styled-components";
 import Days from "../Days/Days";
+import { deleteHabits } from "../services/trackit";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
 
-export default function ThereHabits ({value, length}){
+export default function ThereHabits ({value}){
 
-    const days = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+    const navigate = useNavigate();
+    const {weekDay} = useContext(UserContext);
     const aux = [...value.days];
 
-    if(length === 0) return <NoHabits>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabits>;
-    else{
-        return (
-            <>
-                <Wrapper>
-                    <div className="infos">
-                        <p>{value.name}</p>
-                        <ul>
-                            {days.map((value, index) => <Days key={index} type={true} index={index} array={aux} value={value} />)}
-                        </ul>
-                    </div>
-                    <ion-icon name="trash-outline"></ion-icon>
-                </Wrapper>
-            </>
-        );
+    function deleteHabit(id){
+        if(window.confirm('Deseja excluir esse Hábito?')){
+            deleteHabits(id)
+                .then(() => {
+                    setTimeout(function(){
+                    navigate(0);
+                    }, 1000);
+                    }
+                );
+        }
     }
+
+    return (
+        <>
+            <Wrapper>
+                <div className="infos">
+                    <p>{value.name}</p>
+                    <ul>
+                        {weekDay.map((value, index) => <Days key={index} type={true} index={index} array={aux} value={value} />)}
+                    </ul>
+                </div>
+                <ion-icon onClick={() => deleteHabit(value.id)} name="trash-outline"></ion-icon>
+            </Wrapper>
+        </>
+    );
 }
 
 const Wrapper = styled.div`
@@ -71,10 +85,3 @@ const Wrapper = styled.div`
         padding: 15px;
     }
 `
-
-const NoHabits = styled.p`
-    padding: 28px 18px;
-    font-size: 18px;
-    font-weight: 400;
-    color: #666666;
-`;

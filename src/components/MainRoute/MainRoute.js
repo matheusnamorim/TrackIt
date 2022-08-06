@@ -6,8 +6,6 @@ import Container from "../../styles/Container";
 import Form from "../../styles/Form";
 import { ThreeDots } from "react-loader-spinner";
 import { signIn } from "../services/trackit";
-import { useContext } from "react";
-import UserContext from "../../contexts/UserContext";
 
 export default function MainRoute(){
 
@@ -19,7 +17,6 @@ export default function MainRoute(){
     const [isDisabled, setIsDisabled] = useState(false);
     const [eye, setEye] = useState('eye-off-outline');
 
-    const {setLoginData} = useContext(UserContext);
 
     function login(event){
         event.preventDefault();
@@ -34,7 +31,6 @@ export default function MainRoute(){
         setTimeout(function(){
             signIn(body)
             .then((data) => {
-                setLoginData(data.data);
                 const dadosSerializados = JSON.stringify(data.data);
                 localStorage.setItem('trackit', dadosSerializados);
                 navigate('/hoje');

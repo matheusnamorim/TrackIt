@@ -11,11 +11,21 @@ import History from "./History/History";
 
 export default function App(){
 
-    const [loginData, setLoginData] = useState({});
+    const [weekDay, setWeekDay] = useState([
+        'D', 
+        'S', 
+        'T', 
+        'Q', 
+        'Q', 
+        'S', 
+        'S',
+    ]);
+
+    const [weekSelected, setWeekSelected] = useState([]);
 
     return (
         <>
-            <UserContext.Provider value={{loginData, setLoginData}}>
+            <UserContext.Provider value={{weekDay, setWeekDay, weekSelected, setWeekSelected}}>
                 <GlobalStyle/>
                 <BrowserRouter>
                     <Routes>

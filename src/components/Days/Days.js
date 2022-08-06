@@ -1,29 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import UserContext from "../../contexts/UserContext";
+import { useContext } from "react";
 
-export default function Days({value, days, setDays, index, colorSave, type, array}){
+export default function Days({value, index, colorSave, type, array}){
 
-    const [selected, setSelected] = useState('noSelected');
+    const { weekSelected, setWeekSelected } = useContext(UserContext);
+    const [selected, setSelected] = useState(false);
+
+    useEffect(() => {
+        if(index === 0) index = 7;
+        if(weekSelected !== undefined && weekSelected.includes(index)) {
+            setSelected(!selected);
+        }
+    }, []);
 
     function selectedDay(){
-        if(!colorSave){ 
-            if(selected === 'noSelected') {
-                setSelected('selected');
-                if(index === 0) index=7;
-                setDays([...days, index]);
+        if(!colorSave){
+            if(index === 0) index = 7;
+            if(!selected) {
+                if(!(weekSelected.includes(index))) setWeekSelected([...weekSelected, index]);
+                setSelected(!selected);
             }
             else {
-                if(index === 0) index = 7;
-                const aux = days.filter(i => i !== index);
-                setDays([...aux]);
-                setSelected('noSelected');
+                const aux = weekSelected.filter(i => i !== index);
+                setWeekSelected([...aux]);
+                setSelected(!selected);
             }
         }
     }
 
     if(!type){
-        return (
-            <li className={selected} onClick={()=> selectedDay()}>{value}</li>
-        );
+        return <li className={selected ? 'selected' : 'noSelected'} onClick={()=> selectedDay()}>{value}</li>
     }else{
         if(index === 0) index = 7;  
         if((array.filter(e => e === index)).length === 1) return <li className='selected'>{value}</li>;

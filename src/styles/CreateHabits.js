@@ -45,6 +45,7 @@ const Wrapper = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
     }
     .noSave{
         background-color: #FFF;
@@ -66,6 +67,7 @@ const Wrapper = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
     }
     .noSelected{
         color: #DBDBDB;

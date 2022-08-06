@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import UserContext from "../../contexts/UserContext";
 import { useContext } from "react";
+import styled from "styled-components";
 
 export default function Days({value, index, colorSave, type, array}){
 
@@ -30,10 +31,22 @@ export default function Days({value, index, colorSave, type, array}){
     }
 
     if(!type){
-        return <li className={selected ? 'selected' : 'noSelected'} onClick={()=> selectedDay()}>{value}</li>
+        return selected ? (<Selected onClick={()=> selectedDay()}>{value}</Selected>)
+        : (<NoSelected onClick={()=> selectedDay()}>{value}</NoSelected>);
     }else{
         if(index === 0) index = 7;  
-        if((array.filter(e => e === index)).length === 1) return <li className='selected'>{value}</li>;
-        else return <li className='noSelected'>{value}</li>;
+        if((array.filter(e => e === index)).length === 1) return <Selected>{value}</Selected>;
+        else return <NoSelected>{value}</NoSelected>;
     }
 }
+
+const NoSelected = styled.li`
+    color: #DBDBDB;
+    border: 1px solid #D5D5D5;
+`;
+
+const Selected = styled.li`
+    color: #FFF;
+    background-color: #CFCFCF;
+    border: 1px solid #CFCFCF;
+`;

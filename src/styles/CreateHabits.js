@@ -27,30 +27,18 @@ const Wrapper = styled.div`
     input::placeholder{
         color: #DBDBDB;
     }
-    .btn{
-        padding-right: 18px;
-        display: flex;
-        justify-content: flex-end;
-    }
     button{
         font-family: 'Lexend Deca', sans-serif;
         font-weight: 400;
         width: 84px;
         height: 35px;
-        background-color: #52B6FF;
         border: none;
         border-radius: 5px;
         font-size: 15px;
-        color: #FFF;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-    }
-    .noSave{
-        background-color: #FFF;
-        color: #52B6FF;
-        margin-right: 5px;
     }
     ul{
         margin: 0 18px;
@@ -68,14 +56,5 @@ const Wrapper = styled.div`
         align-items: center;
         justify-content: center;
         cursor: pointer;
-    }
-    .noSelected{
-        color: #DBDBDB;
-        border: 1px solid #D5D5D5;
-    }
-    .selected{
-        color: #FFF;
-        background-color: #CFCFCF;
-        border: 1px solid #CFCFCF;
     }
 `;

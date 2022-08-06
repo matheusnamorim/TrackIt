@@ -11,12 +11,12 @@ export default function ThereHabits ({value, deleteHabit}){
     return (
         <>
             <Wrapper>
-                <div className="infos">
+                <Infos>
                     <p>{value.name}</p>
                     <ul>
                         {weekDay.map((value, index) => <Days key={index} type={true} index={index} array={aux} value={value} />)}
                     </ul>
-                </div>
+                </Infos>
                 <ion-icon onClick={() => deleteHabit(value.id)} name="trash-outline"></ion-icon>
             </Wrapper>
         </>
@@ -31,12 +31,6 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
 
-    .infos{
-        padding: 15px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
     p{
         margin-bottom: 10px;
         font-size: 20px;
@@ -56,17 +50,15 @@ const Wrapper = styled.div`
         align-items: center;
         justify-content: center;
     }
-    .noSelected{
-        color: #DBDBDB;
-        border: 1px solid #D5D5D5;
-    }
-    .selected{
-        color: #FFF;
-        background-color: #CFCFCF;
-        border: 1px solid #CFCFCF;
-    }
     ion-icon{
         font-size: 25px;
         padding: 15px;
     }
-`
+`;
+
+const Infos = styled.div`
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`;

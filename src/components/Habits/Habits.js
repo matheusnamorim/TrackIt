@@ -99,10 +99,10 @@ export default function Habits(){
                         <ul>
                             {weekDay.map((value, index) => <Days key={index} colorSave={colorSave} value={value} index={index} />)}
                         </ul>
-                        <div className="btn">
-                            <button onClick={()=>cancelHabits()} className="noSave">Cancelar</button>
-                            <button onClick={()=>saveHabits()} className="save">{msgBtnSave}</button>
-                        </div>
+                        <Btn>
+                            <Cancel onClick={()=>cancelHabits()}>Cancelar</Cancel>
+                            <Save onClick={()=>saveHabits()}>{msgBtnSave}</Save>
+                        </Btn>
                     </CreateHabits>) 
                 : 
                 (<></>)}
@@ -157,4 +157,21 @@ const NoHabits = styled.p`
     font-size: 18px;
     font-weight: 400;
     color: #666666;
+`;
+
+const Btn = styled.div`
+    padding-right: 18px;
+    display: flex;
+    justify-content: flex-end;
+`;
+
+const Cancel = styled.button`
+    background-color: #FFF;
+    color: #52B6FF;
+    margin-right: 5px;
+`;
+
+const Save = styled.button`
+    background-color: #52B6FF;
+    color: #FFF;
 `;

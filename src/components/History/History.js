@@ -20,7 +20,7 @@ export default function History(){
 
 const Text = styled.p`
     color: #126BA5;
-    font-size: 18px;
+    font-size: 22px;
     padding: 100px 18px 0 18px;
 `;
 

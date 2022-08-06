@@ -23,8 +23,8 @@ export default function Habits(){
     const [reload, setReload] = useState(false);
     const [thereHabits, setThereHabits] = useState(true);
 
-    const { weekDay, weekSelected } = useContext(UserContext);
-    
+    const { weekDay, weekSelected, setWeekSelected } = useContext(UserContext);
+
     useEffect(() => {
         const promise = habitsList({});
         promise.then((data) => {
@@ -47,7 +47,11 @@ export default function Habits(){
                     .then(() => {
                         setThereHabits(true);
                         setReload(!reload);
-                        setIsDisabled(!isDisabled);
+                        setWeekSelected([]);
+                        setMsgBtnSave('Salvar');
+                        setNameHabits('');
+                        setColorSave(false);
+                        setIsDisabled(false);
                     })
                     .catch(() => {
                         alert('Erro: insira os dados novamente');
@@ -55,7 +59,7 @@ export default function Habits(){
                         setMsgBtnSave('Salvar');
                     })
                 }, 1000);   
-            }
+            }else alert('Insira os todos os dados!');
         }
     }
 

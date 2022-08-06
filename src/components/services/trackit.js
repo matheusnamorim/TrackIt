@@ -44,4 +44,11 @@ function habitsOfToday(){
     const promise = axios.get(`${base_URl}/habits/today`, config);
     return promise;
 }
-export { signIn, registerUser, habitsList, createHabit, deleteHabits, habitsOfToday };
+
+function doneHabits(id, body){
+    const config = createHeaders();
+    const promise = axios.post(`${base_URl}/habits/${id}/check`, body, config);
+    return promise;
+}
+
+export { signIn, registerUser, habitsList, createHabit, deleteHabits, habitsOfToday, doneHabits };
